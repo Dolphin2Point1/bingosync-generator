@@ -1,9 +1,9 @@
+import copy
+
 import jsonpickle
 import sys
 import getopt
-import yaml
 
-import pandas
 
 import BingoBoard
 import ChoicePool
@@ -15,7 +15,9 @@ file = ""
 
 outputFile = 'output.json'
 
-for o, a in opts:
+print(opts)
+
+for o, a in opts[0]:
     if o == '-e':
         excel = True
         file = a
@@ -27,17 +29,23 @@ for o, a in opts:
             raise ValueError("Output file must end with .json, currently only json is supported.")
         outputFile = a
 
+
 if file == "":
     raise ValueError("You must specify an input file.")
 
 if excel:
+    import pandas
     dataframe: pandas.DataFrame = pandas.read_excel(io=file)
-    choices = dataframe['Bingo Choices']
+    choices = dataframe['Bingo Choices'].tolist()
 else:
-    yamlInput = yaml.load(file)
-    choices = yamlInput['choices']
+    import yaml
+    from yaml import BaseLoader
+    with open(file, "r") as f:
+        yamlInput = f.read()
+    yamlOutput = yaml.load(yamlInput, Loader=BaseLoader)
+    choices = yamlOutput['choices']
 
-choice_pool = ChoicePool.ChoicePool(choices.tolist())
+choice_pool = ChoicePool.ChoicePool(choices)
 
 bingo_board = BingoBoard.BingoBoard(choice_pool)
 
