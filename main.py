@@ -15,8 +15,6 @@ file = ""
 
 outputFile = 'output.json'
 
-print(opts)
-
 for o, a in opts[0]:
     if o == '-e':
         excel = True
