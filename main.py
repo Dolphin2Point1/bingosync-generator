@@ -47,5 +47,5 @@ choice_pool = ChoicePool.ChoicePool(choices)
 
 bingo_board = BingoBoard.BingoBoard(choice_pool)
 
-with open('output.json', 'w') as file:
+with open(outputFile, 'w') as file:
     file.write(jsonpickle.encode(bingo_board.getBoard()))
