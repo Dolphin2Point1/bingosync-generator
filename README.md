@@ -48,6 +48,8 @@ to go to google sheets, you must use yaml. To use a spreadsheet, you need to cre
 column, you need to give it the title "Bingo Choices". Then you can put them in the first column, and export it in the 
 format of your choice. When done, go to "Using" to continue.
 
+### **However, we must have atleast 25 choices, because that's how many we have on the board. Optimally you'd have several times more than that, so random boards can be chosen each time.** 
+
 ## Using
 
 To use the program, you'll need to run it and specify the input file, and optionally the output file.
